@@ -33,7 +33,7 @@ async def searcher(e):
     except BaseException:
         limit = 5
 
-    limit = 99 if limit > 99 else limit
+    limit = min(limit, 99)
     text, c = "", 0
     async for msg in e.client.iter_messages(
         e.chat_id,

@@ -31,14 +31,13 @@ async def fastly_bot(event):
         return
     med = await event.download_media()
     upload = upload_file(med)
-    link = "https://telegra.ph" + upload[0]
+    link = f"https://telegra.ph{upload[0]}"
     out = await async_searcher(base_url.format(api=api, tgraph=link), re_json=True)
     try:
         txt = out["ParsedResults"][0]["ParsedText"]
     except (KeyError, IndexError):
         return
-    txt = txt.split("By@")[0].replace("\n", "").replace("\r", "")
-    if txt:
+    if txt := txt.split("By@")[0].replace("\n", "").replace("\r", ""):
         try:
             await event.reply(txt)
         except Exception as er:

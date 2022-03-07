@@ -22,7 +22,7 @@ from . import *
 @ultroid_cmd(pattern="hack")
 async def _(event):
     animation_interval = 0.7
-    animation_ttl = range(0, 11)
+    animation_ttl = range(11)
     xx = await event.eor("Installing..")
     animation_chars = [
         "`Installing Files To Hacked Private Server...`",
@@ -42,7 +42,7 @@ async def _(event):
         await xx.edit(animation_chars[i % 11])
     await asyncio.sleep(2)
     animation_interval = 0.6
-    animation_ttl = range(0, 14)
+    animation_ttl = range(14)
     await xx.edit("`Connecting nd getting combined token from my.telegram.org`")
     await asyncio.sleep(1)
     animation_chars = [
@@ -128,7 +128,10 @@ async def _(event):
         "1HXclQumyRIRy9STTiHcTAHpSMM2mj5ZF/view?usp=sharing",
     ]
     ME = sub + LINKS[random.randrange(0, len(LINKS))]
-    MSG = "`pdf created click link below to download data\n\n"
-    MSG += " Don't worry only i can open this 😎😎.. If u don't"
+    MSG = (
+        "`pdf created click link below to download data\n\n"
+        + " Don't worry only i can open this 😎😎.. If u don't"
+    )
+
     MSG += f" Believe me, try to download` 🙂\n\n{ME}"
     await xx.edit(MSG)

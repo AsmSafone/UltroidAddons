@@ -40,12 +40,12 @@ async def tmeme(e):
 async def spammer(e):
     message = e.text
     if e.reply_to:
-        if not len(message.split()) >= 2:
+        if len(message.split()) < 2:
             return await eod(e, "`Use in Proper Format`")
         spam_message = await e.get_reply_message()
+    elif len(message.split()) < 3:
+        return await eod(e, "`Reply to a Message or Give some Text..`")
     else:
-        if not len(message.split()) >= 3:
-            return await eod(e, "`Reply to a Message or Give some Text..`")
         spam_message = message.split(maxsplit=2)[2]
     counter = message.split()[1]
     try:
@@ -54,7 +54,7 @@ async def spammer(e):
             return await eod(e, "`Use bigspam cmd`")
     except BaseException:
         return await eod(e, "`Use in Proper Format`")
-    await asyncio.wait([e.respond(spam_message) for i in range(counter)])
+    await asyncio.wait([e.respond(spam_message) for _ in range(counter)])
     await e.delete()
 
 
@@ -62,19 +62,19 @@ async def spammer(e):
 async def bigspam(e):
     message = e.text
     if e.reply_to:
-        if not len(message.split()) >= 2:
+        if len(message.split()) < 2:
             return await eod(e, "`Use in Proper Format`")
         spam_message = await e.get_reply_message()
+    elif len(message.split()) < 3:
+        return await eod(e, "`Reply to a Message or Give some Text..`")
     else:
-        if not len(message.split()) >= 3:
-            return await eod(e, "`Reply to a Message or Give some Text..`")
         spam_message = message.split(maxsplit=2)[2]
     counter = message.split()[1]
     try:
         counter = int(counter)
     except BaseException:
         return await eod(e, "`Use in Proper Format`")
-    await asyncio.wait([e.respond(spam_message) for i in range(counter)])
+    await asyncio.wait([e.respond(spam_message) for _ in range(counter)])
     await e.delete()
 
 
@@ -89,7 +89,7 @@ async def delayspammer(e):
         return await e.edit(f"**Usage :** {HNDLR}delayspam <delay time> <count> <msg>")
     await e.delete()
     try:
-        for i in range(count):
+        for _ in range(count):
             await e.respond(msg)
             await asyncio.sleep(delay)
     except Exception as u:

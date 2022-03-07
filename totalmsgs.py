@@ -16,8 +16,7 @@ from . import *
 
 @ultroid_cmd(pattern="totalmsgs ?(.*)")
 async def _(e):
-    match = e.pattern_match.group(1)
-    if match:
+    if match := e.pattern_match.group(1):
         user = match
     elif e.is_reply:
         user = (await e.get_reply_message()).sender_id
