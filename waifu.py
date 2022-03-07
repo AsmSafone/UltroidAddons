@@ -47,7 +47,7 @@ async def waifu(animu):
             await xx.edit(get_string("sts_1"))
             return
     waifus = [32, 33, 37, 40, 41, 42, 58, 20]
-    finalcall = "#" + (str(random.choice(waifus)))
+    finalcall = f"#{str(random.choice(waifus))}"
     sticcers = await animu.client.inline_query(
         "stickerizerbot",
         f"{finalcall}{(deEmojify(text))}",

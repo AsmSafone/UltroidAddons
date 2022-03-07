@@ -30,8 +30,7 @@ async def _(e):
     url = "https://da.gd/s?url=https://lmgtfy.com/?q={}%26iie=1".format(
         text.replace(" ", "+")
     )
-    response = requests.get(url).text
-    if response:
+    if response := requests.get(url).text:
         await eor(e, "[{}]({})\n`Thank me Later 🙃` ".format(text, response.rstrip()))
     else:
         await eod(e, "`something is wrong. please try again later.`")
@@ -45,8 +44,7 @@ async def _(e):
     url = "https://da.gd/s?url=https://lmddgtfy.net/?q={}".format(
         text.replace(" ", "+")
     )
-    response = requests.get(url).text
-    if response:
+    if response := requests.get(url).text:
         await eor(e, "[{}]({})\n`Thank me Later 🙃` ".format(text, response.rstrip()))
     else:
         await eod(e, "`something is wrong. please try again later.`")

@@ -153,17 +153,23 @@ class BrainfuckInterpreter:
         self.instruction_pointer += 1
 
     def available(self) -> bool:
-        return not self.instruction_pointer >= len(self._commands)
+        return self.instruction_pointer < len(self._commands)
 
     def command(self):
         return self._commands[self.instruction_pointer]
 
 
 def bf(text):
-  items = []
-  for c in text:
-     items.append('[-]>[-]<' + ('+' * (ord(c) // 10)) + '[>++++++++++<-]>' + ('+' * (ord(c) % 10)) + '.<')
-  return ''.join(items)
+    items = [
+        '[-]>[-]<'
+        + ('+' * (ord(c) // 10))
+        + '[>++++++++++<-]>'
+        + ('+' * (ord(c) % 10))
+        + '.<'
+        for c in text
+    ]
+
+    return ''.join(items)
 
 
 @ultroid_cmd(
@@ -172,11 +178,10 @@ def bf(text):
 async def _(event):        
     input_ = event.text[4:]
     if not input_:
-        if event.reply_to_msg_id:
-            previous_message = await event.get_reply_message()
-            input_ = previous_message.message
-        else:
+        if not event.reply_to_msg_id:
             return await eod(event, "Give me some text lol", time=5)
+        previous_message = await event.get_reply_message()
+        input_ = previous_message.message
     await eor(event, f"{bf(input_)}")
     
 
@@ -186,9 +191,8 @@ async def _(event):
 async def _(event):
     input_ = event.text[5:]
     if not input_:
-        if event.reply_to_msg_id:
-            previous_message = await event.get_reply_message()
-            input_ = previous_message.message
-        else:
+        if not event.reply_to_msg_id:
             return await eod(event, "Give me some text lol", time=5)
+        previous_message = await event.get_reply_message()
+        input_ = previous_message.message
     await eor(event, f"{evaluate(input_)}")

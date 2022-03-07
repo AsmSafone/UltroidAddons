@@ -50,4 +50,4 @@ async def encod(e):
         atc = et.decode("ascii")
         await eor(e, f"**=>> Decoded Text :** `{match}`\n\n**=>> OUTPUT :**\n`{atc}`")
     except Exception as p:
-        await eor(e, "**ERROR :** " + str(p))
+        await eor(e, f"**ERROR :** {str(p)}")
